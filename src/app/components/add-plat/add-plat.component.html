@@ -1,0 +1,68 @@
+<section class="breadcrumb breadcrumb_bg M-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="breadcrumb_iner text-center">
+            <div class="breadcrumb_iner_item">
+              <h2>{{binding}}-plat</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="regervation_part section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5">
+                <div class="section_tittle">
+                    
+                    <h2>{{binding}} your new plats</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="regervation_part_iner">
+                    <form [formGroup]="platForm" >
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="email"   formControlName="name" class="form-control" id="inputEmail4" placeholder="Name *">
+                            </div>
+                            <span *ngIf="platForm.controls['name'].invalid && platForm.controls['name'].touched" >
+                                <span style="color: red;" *ngIf="platForm.controls['name'].errors?.['required']">Please the name of your plat !</span>
+                            </span>
+                            <div class="form-group col-md-6">
+                                <input type="text" formControlName="price" class="form-control" id="inputPassword4" placeholder="Price *">
+                            </div>
+                            <span *ngIf="platForm.controls['price'].invalid &&(platForm.controls['price'].touched || platForm.controls['price'].dirty) " >
+                                <span style="color: red;" *ngIf="platForm.controls['price'].errors?.['required']">Please the Price of your plat !</span>
+                                <span style="color: red;" *ngIf="platForm.controls['price'].errors?.['pattern']">the Price must be finished with currency(dt)</span>
+                            </span>
+                            <div class="form-group col-md-12">
+                                <textarea  formControlName="description" class="form-control" id="Textarea" rows="4" placeholder="Description *"></textarea>
+                            </div>
+                            <span *ngIf="platForm.controls['description'].invalid && platForm.controls['description'].touched" >
+                                <span style="color: red;" *ngIf="platForm.controls['description'].errors?.['required']">Please the description of your plat !</span>
+                            </span>
+                            <div *ngIf="!verifiedSelector"  class="form-group col-md-6">
+                               <select (change)="selectChef($event)" class="form-control" name="" id="selector">
+                                <option value=""></option>
+                                <option [value]="x._id" *ngFor="let x of chefs">{{x.name}}</option>
+                               </select>
+                            </div>
+                           
+                            
+                        </div>
+
+
+                        <div class="regerv_btn">
+                            <button (click)="validate()" class="btn_4">{{binding}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

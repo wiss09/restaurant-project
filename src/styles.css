@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+/* regles de page Login */
+.M-top{
+    margin-top: 100px;
+}
+input{
+    border-color: gray;
+}
+.P-left {
+    padding-left:20px ;
+}
+input{
+    border-color: black;
+    
+}

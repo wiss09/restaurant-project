@@ -1,0 +1,147 @@
+<section class="breadcrumb breadcrumb_bg M-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Sign up</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="P-left row M-top ">
+
+    <div class="col-lg-8 ">
+        <form #signupForm="ngForm" (ngSubmit)="addUser()" class="form-contact contact_form .flex " id="contactForm">
+
+
+
+
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <input class="form-control" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone:true}"
+                        type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'"
+                        placeholder=' first name' #firstName="ngModel" required minlength="4">
+                </div>
+            </div>
+            <div class="error" *ngIf="(firstName.touched || signupForm.submitted) && firstName.errors?.['required']">
+                firstName is required</div>
+            <div class="error" *ngIf="(firstName.touched || signupForm.submitted) && firstName.errors?.['minlength']">
+                firstName should be at least 4 caracters</div>
+
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <input class="form-control" [(ngModel)]="user.lastName " [ngModelOptions]="{standalone:true}"
+                        type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'"
+                        placeholder='last name' #lastName="ngModel" minlength="4" required>
+                </div>
+                <div class="error" *ngIf="(lastName.touched || signupForm.submitted) && lastName.errors?.['required']">
+                    lastName is required</div>
+                <div class="error" *ngIf="(lastName.touched || signupForm.submitted) && lastName.errors?.['minlength']">
+                    lastName should be at least 4 caracters</div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <input class="form-control" [(ngModel)]="user.email" [ngModelOptions]="{standalone:true}"
+                        type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'"
+                        placeholder='Enter email address' #email="ngModel"
+                        pattern="^[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{2,3}$" required>
+                </div>
+                <div class="error" *ngIf="(email.touched || signupForm.submitted) && email.errors?.['required']">Email
+                    is required</div>
+                <div class="error" *ngIf="(email.touched || signupForm.submitted) && email.errors?.['pattern']">Enter a
+                    valid email </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" [(ngModel)]="user.phone" [ngModelOptions]="{standalone:true}"
+                            type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your phone'"
+                            placeholder='Enter your phone' #phone="ngModel" pattern="^((\\+216-?)|0)?[0-9]{11}$"
+                            required>
+                    </div>
+                </div>
+
+                <!-- <div class="error" *ngIf="(phone.touched || signupForm.submitted) && phone.errors?.['required']">phone's
+                    number is required</div>
+                <div class="error" *ngIf="(phone.touched || signupForm.submitted) && phone.errors?.['pattern']">your
+                    phone's number must be started with 216 </div> -->
+
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" [(ngModel)]="user.password" [ngModelOptions]="{standalone:true}"
+                            type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter password'"
+                            placeholder='password' #password="ngModel" required
+                            pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,16}$">
+                    </div>
+                </div>
+                <!-- <div class="error" *ngIf="(password.touched || signupForm.submitted) && password.errors?.['required'] ">
+                    password is required</div>
+                <div class="error" *ngIf="(password.touched || signupForm.submitted) && password.errors?.['pattern'] ">
+                    password length must be between 8 and 16 characters , must be contains upper/lower case and contains
+                    numbers </div> -->
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" [(ngModel)]="user.confirm" [ngModelOptions]="{standalone:true}"
+                            type="password" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = 'Enter email address'" placeholder='confirm password'
+                            #confirm="ngModel" required>
+                    </div>
+                </div>
+                <div class="error" *ngIf="(password.touched || signupForm.submitted) && password.errors?.['required'] ">
+                    password is required</div>
+                <div class="error" *ngIf="(password.touched || signupForm.submitted) && user.password != user.confirm ">
+                    confirm password must be the same with new password</div>
+
+            </div>
+            <!-- partie attach file -->
+            <div class="flex col-lg-12">
+
+                <div>
+                    <button (click)="avatarUpload.click()" type="submit" class="button button-contactForm btn_4">Upload image</button>
+                    <input #avatarUpload type="file" class="form-control-file" (change)="selectAvatar($event)" style="visibility: hidden;">
+                    <img [src]="avatarPreview" alt="">
+                </div>
+                <div>
+                    <button (click)="cvUpload.click()" type="submit" class="button button-contactForm btn_4">Upload cv</button>
+                    <input  #cvUpload type="file" class="form-control-file" (change)="selectCv($event)" style="visibility: hidden;">
+                </div>
+            </div>
+           <!-- partie attach file -->
+
+            <div class="form-group mt-3">
+                <button type="submit" class="button button-contactForm btn_4">Sign up</button>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-lg-4">
+        <div class="media contact-info">
+            <span class="contact-info__icon"><i class="ti-home"></i></span>
+            <div class="media-body">
+                <h3>Buttonwood, California.</h3>
+                <p>Rosemead, CA 91770</p>
+            </div>
+        </div>
+        <div class="media contact-info">
+            <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+            <div class="media-body">
+                <h3>00 (440) 9865 562</h3>
+                <p>Mon to Fri 9am to 6pm</p>
+            </div>
+        </div>
+        <div class="media contact-info">
+            <span class="contact-info__icon"><i class="ti-email"></i></span>
+            <div class="media-body">
+                <h3>supporcolorlib.com</h3>
+                <p>Send us your query anytime!</p>
+            </div>
+        </div>
+    </div>
+</div>

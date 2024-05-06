@@ -1,0 +1,11 @@
+button{
+    background-color: transparent;
+    border: none;
+}
+button:hover{
+    color: orangered;
+}
+.logger{
+    font-weight: bold;
+    color: orangered;
+}

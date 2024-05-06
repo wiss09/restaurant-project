@@ -1,0 +1,10 @@
+<div class="single_food_item media">
+   <a  (click)="display(menuInput._id)"> <img   [src]="menuInput.img" class="mr-3" alt="..."></a>
+    <div class="media-body align-self-center">
+        <h3>{{menuInput.name}}</h3>
+        <p>{{menuInput.description}}</p>
+        <h5  [ngClass]="{'low':menuInput.price < 10  ,'high':menuInput.price >= 10}">
+          {{menuInput.price}} Dt
+        </h5>
+    </div>
+</div>
