@@ -1,6 +1,6 @@
 const plat=require('./models/plats')
 const usersRoute=require('./routes/users')
-
+const platsRoute=require('./routes/plats')
 const path=require('path')
 
 
@@ -27,7 +27,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/dingoDB')
 .then(() => console.log('Connected!'));
 
 app.use('/users' , usersRoute)
-app.use('/files', express.static(path.join('backend/uploads')));
+app.use('/plats' , platsRoute)
+app.use('/avatar', express.static(path.join('backEnd/uploads/pictures')));
+app.use('/resume', express.static(path.join('backEnd/uploads/docs')));
+app.use('/platPicture' , express.static(path.join('backEnd/uploads/pictures-plats')))
 // app.use('/cvFiles', express.static(path.join('backend/cvs')));
 
 

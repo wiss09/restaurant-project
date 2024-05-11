@@ -10,18 +10,18 @@ import { AddChefComponent } from './components/add-chef/add-chef.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { SingleChefComponent } from './components/single-chef/single-chef.component';
 import { SinglePlatComponent } from './components/single-plat/single-plat.component';
+import { AdminGuardGuard } from './admin-guard.guard';
 
 const routes: Routes = [
   {path:"login" , component:LoginComponent},
   {path:"signup" , component:SignupComponent},
-  {path:"signup-admin" , component:SignupComponent},
-  {path:"signup-chef" , component:SignupComponent},
   {path:"" , component:HomeComponent},
+  
   {path:"plats" , component:PlatsComponent},
   {path:"chefs" , component:ChefsComponent},
   {path:"add-plat" , component:AddPlatComponent},
   {path:"add-chef" , component:AddChefComponent},
-  {path:"administrator" , component:AdminComponent},
+  {path:"administrator" , component:AdminComponent , canActivate:[AdminGuardGuard]},
   {path:"single-chef/:id",component:SingleChefComponent},
   {path:"single-plat/:id",component:SinglePlatComponent},
   {path:"edit-chef/:id" , component:AddChefComponent},

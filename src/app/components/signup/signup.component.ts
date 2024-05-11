@@ -14,7 +14,8 @@ user:any={}
 avatar:any
 cv:any
 avatarPreview:any
-signPath:string=this.router.url
+cvPreview:any;
+role:string=''
   constructor( private service : UserService , private router: Router) { }
 
   ngOnInit(): void {
@@ -37,16 +38,21 @@ signPath:string=this.router.url
     const inputElement=event.target as HTMLInputElement
     if (inputElement && inputElement.files && inputElement.files.length >0) {
       this.cv = inputElement.files[0];
+
+      const reader = new FileReader();
+      reader.onload = () => { this.cvPreview = reader.result as string; };
+      reader.readAsDataURL(this.cv);
     
       
     }
   }
   addUser(){
   
-    if (this.signPath=='/signup-admin') {
-      this.user.role='admin'
-    }else if (this.signPath=='/signup-chef') {
-      this.user.role='chef'
+    if (this.role=='admin') {
+      this.user.role=this.role
+    }else if (this.role=='chef') {
+      this.user.status='unacceptable'
+      this.user.role=this.role
 
     }else{
       this.user.role='client'
@@ -56,5 +62,10 @@ signPath:string=this.router.url
     this.service.signup(this.user , this.cv, this.avatar).subscribe((res)=>{
       alert (res.msg)})
       console.log(this.user);
+  }
+  selectRole(event:any){
+ this.role=(event.target.value);
+  console.log(this.role);
+  
   }
 }

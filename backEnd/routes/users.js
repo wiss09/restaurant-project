@@ -24,8 +24,10 @@ const store = multer.diskStorage({
     destination: function (req, file, cb) {
         const isValid = MIME_TYPE[file.mimetype];
 
-        if (isValid) {
-            cb(null, 'backend/uploads')
+        if (isValid=='pdf') {
+            cb(null, 'backEnd/uploads/docs')
+        }else{
+            cb(null, 'backEnd/uploads/pictures')
         }
 
 
@@ -34,7 +36,7 @@ const store = multer.diskStorage({
     filename: function (req, file, cb) {
         let idFileName = Date.now()
 
-        const name = idFileName + '-' + file.originalname;
+        const name = idFileName + '-' + file.originalname.split(' ').join('-');
 
         cb(null, name);
     }
@@ -55,8 +57,8 @@ router.post('/signup', upload.fields([{ name: 'avatar', maxCount: 1 }, { name: '
             Bcrypt.hash(newUser.password, 10).then((hashData) => {
 
                 newUser.password = hashData
-                newUser.cv = `http://localhost:3000/files/${req.files['cv'][0].filename}`
-                newUser.avatar = `http://localhost:3000/files/${req.files['avatar'][0].filename}`
+                newUser.cv = `http://localhost:3000/resume/${req.files['cv'][0].filename}`
+                newUser.avatar = `http://localhost:3000/avatar/${req.files['avatar'][0].filename}`
                 addUser = new User(newUser)
                 addUser.save().then((log) => {
                     if (log) {
@@ -74,7 +76,7 @@ router.get("/", (req, reponse) => {
     User.find().then((docs) => {
         reponse.json({ users: docs })
     })
-    console.log('Here into Bisuness Logic : GET all users', req.body)
+    console.log('Here into Bisuness Logic : GET all users')
 
 })
 
@@ -91,7 +93,8 @@ router.post('/login', (req, res) => {
                         role: found.role,
                         fName: found.firstName,
                         lName: found.lastName,
-                        userId: found._id
+                        userId: found._id,
+                        avatar:found.avatar
                     },
                         secretKey, { expiresIn: '1h' });
                     res.json({ msg: 'You are Logged', token: token })

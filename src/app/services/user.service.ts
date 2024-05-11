@@ -23,6 +23,8 @@ userURL:string='http://localhost:3000/users'
    formData.append('phone' , object.phone );
    formData.append('password' , object.password );
    formData.append('confirm' ,object.confirm );
+   formData.append('role' ,object.role );
+   formData.append('status' ,object.status );
 
     return this.httpClient.post<{msg:string}>(this.userURL+'/signup',formData)
   }

@@ -12,8 +12,22 @@
     </div>
 </section>
 <div class="P-left row M-top ">
-
+   
     <div class="col-lg-8 ">
+        
+            <h3 class="mb-30">What'is your role</h3>
+            <div class="form-group w-25" id="default-select">
+                <select (change)="selectRole($event)" class="form-control">
+                    <option value=" 1">Choose role</option>
+                    <option value="admin">Admin</option>
+                    <option value="chef">Chef</option>
+                    <option value="client">Client</option>
+                    
+                </select>
+                
+            
+        </div>
+        <hr>
         <form #signupForm="ngForm" (ngSubmit)="addUser()" class="form-contact contact_form .flex " id="contactForm">
 
 
@@ -104,16 +118,21 @@
             <div class="flex col-lg-12">
 
                 <div>
-                    <button (click)="avatarUpload.click()" type="submit" class="button button-contactForm btn_4">Upload image</button>
-                    <input #avatarUpload type="file" class="form-control-file" (change)="selectAvatar($event)" style="visibility: hidden;">
-                    <img [src]="avatarPreview" alt="">
+                    <button (click)="avatarUpload.click()" type="submit" class="button button-contactForm btn_4">Upload
+                        image</button>
+                    <input #avatarUpload type="file" class="form-control-file" (change)="selectAvatar($event)"
+                        style="visibility: hidden;">
+                    <img [src]="avatarPreview" alt="" style="width: 200px; height: 200; border-radius: 10px;">
                 </div>
                 <div>
-                    <button (click)="cvUpload.click()" type="submit" class="button button-contactForm btn_4">Upload cv</button>
-                    <input  #cvUpload type="file" class="form-control-file" (change)="selectCv($event)" style="visibility: hidden;">
+                    <button (click)="cvUpload.click()" type="submit" class="button button-contactForm btn_4">Upload
+                        cv</button>
+                    <input #cvUpload type="file" class="form-control-file" (change)="selectCv($event)"
+                        style="visibility: hidden;">
                 </div>
+                
             </div>
-           <!-- partie attach file -->
+            <!-- partie attach file -->
 
             <div class="form-group mt-3">
                 <button type="submit" class="button button-contactForm btn_4">Sign up</button>

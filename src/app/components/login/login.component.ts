@@ -19,20 +19,25 @@ export class LoginComponent implements OnInit {
 
 
         sessionStorage.setItem('DingoToken', res.token)
-        let role: any = jwtDecode(res.token)
-        if (role == 'admin') {
+        let user: any = jwtDecode(res.token)
+        if (user.role == 'admin') {
           this.router.navigate(['administrator'])
+        } else if (user.role == 'chef') {
+          this.router.navigate(['add-plat'])
         } else {
+
           this.router.navigate([''])
-          this.error = ''
-          alert(res.msg)
         }
-        } else { this.error = 'Check your Email and Password' }
+        this.error = ''
 
 
 
+      } else {
+        this.error = 'Check your Email and Password'
+      }
 
-      })
+
+    })
   }
   constructor(
     private inputBuilder: FormBuilder,
